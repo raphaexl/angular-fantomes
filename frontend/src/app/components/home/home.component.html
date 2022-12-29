@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+<nav>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/fantomes"> Fantomes </a>
+</nav>
+<ul class="fantomes">
+  <li *ngFor="let fantome of fantomes">
+    <a routerLink="/detail/{{fantome._id}}">
+     {{fantome.name}}
+    </a>
+  </li>
+</ul>
+  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+
+</mat-card-content>
+</mat-card>

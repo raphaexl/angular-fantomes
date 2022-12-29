@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+<div *ngIf="fantome">
+    <h2>{{fantome.name | uppercase}} Details</h2>
+    <div>Role: {{fantome.role}}</div>
+    <div>
+        <div *ngIf="fantome._id === getLocalUserId()">
+            <mat-form-field>
+                <mat-label>Role</mat-label>
+                <mat-select [(ngModel)]="fantome.role">
+                  <mat-option value="Guerrier">Guerrier</mat-option>
+                  <mat-option value="Alchimiste">Alchimiste</mat-option>
+                  <mat-option value="Sorcier">Sorcier</mat-option>
+                  <mat-option value="Espions">Espions</mat-option>
+                  <mat-option value="Enchanteur">Enchanteur</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
+    <button *ngIf="fantome._id !== getLocalUserId()" mat-raised-button color="primary"  (click)="goBack()">Add As Friend</button>
+</div>
+</mat-card-content>
+</mat-card>

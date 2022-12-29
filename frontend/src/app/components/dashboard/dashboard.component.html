@@ -1,0 +1,12 @@
+
+<mat-card>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+        <h2>Friends</h2>
+        <div class="fantomees-menu">
+          <a *ngFor="let fantome of fantomes"
+              routerLink="/detail/{{fantome._id}}">
+              {{fantome.name}}
+          </a>
+        </div>
+    </mat-card-content>
+</mat-card>
