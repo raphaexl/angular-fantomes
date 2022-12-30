@@ -10,6 +10,7 @@ import { FantomeService } from '../../services/fantome.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  //Get set the fantome and friends Fantome
   fantomes: Fantome[] = [];
   fantome?: Fantome;
 

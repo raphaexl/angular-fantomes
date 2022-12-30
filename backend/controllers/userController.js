@@ -92,7 +92,7 @@ const getUser = asyncHandler(async (req, res) => {
   res.status(200).json(user)
 });
 
-// @desc    Get users data
+// @desc    Get users
 // @route   GET /api/users/all
 // @access  Private
 const getAllUsers = asyncHandler(async (req, res) => {
@@ -136,7 +136,6 @@ const updateUser = asyncHandler(async (req, res) => {
     if (friend){
       if (action){
         const found = user.friends.find(_userid => _userid.toString() === friend);
-        console.log("user ", user.friends, " found ? :", found);
         //Check among all users
         const req_user = await User.findById(friend)
             if (!req_user) {
@@ -159,15 +158,13 @@ const updateUser = asyncHandler(async (req, res) => {
           }
         }
         if (dirty){
-        //  console.log("Before ", friendParams)
           const friendUpdate = await User.findByIdAndUpdate(friend, friendParams, {
             new: true,
           })
-          console.log("After Update : ", friendUpdate);
+
         }
       }
     }
-    console.log("update params ", updateParams)
   const updatedUser = await User.findByIdAndUpdate(req.params.id, updateParams, {
     new: true,
   })

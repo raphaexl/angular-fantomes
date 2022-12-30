@@ -26,7 +26,6 @@ export class FantomeDetailComponent {
   }
 
   getfantome():void{
-   // const id =  Number(this.route.snapshot.paramMap.get('id'));
     const id =  String(this.route.snapshot.paramMap.get('id'));
     this.fantomeService.getFantome(id)
     .subscribe(fantome => this.fantome = fantome);
