@@ -28,7 +28,7 @@ export class AuthenticationClient {
     return this.http.post(
       environment.apiUrl + '/register',
       {
-        username: username,
+        name: username,
         email: email,
         password: password,
       },

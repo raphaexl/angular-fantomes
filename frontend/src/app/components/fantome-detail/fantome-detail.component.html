@@ -17,8 +17,14 @@
               </mat-form-field>
         </div>
     </div>
+    <div *ngIf="fantome._id === getLocalUserId(); else friend">
+        <button  mat-raised-button color="primary"  (click)="updateRole()">Update</button>
+    </div>
     <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
-    <button *ngIf="fantome._id !== getLocalUserId()" mat-raised-button color="primary"  (click)="goBack()">Add As Friend</button>
+    <ng-template #friend>
+        <button *ngIf="!isFriend()" mat-raised-button color="primary"  (click)="addAsFriend()">Add As Friend</button>
+        <button *ngIf="isFriend()" mat-raised-button color="primary"  (click)="removeAsFriend()">Remove As Friend</button>
+    </ng-template>
 </div>
 </mat-card-content>
 </mat-card>

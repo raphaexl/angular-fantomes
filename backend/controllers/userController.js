@@ -153,19 +153,17 @@ const updateUser = asyncHandler(async (req, res) => {
           }
         }else if(action.toLowerCase() === 'remove'){
           if (found){ // He was a friend remove him
-            updateParams.friends = updateParams.friends.filter(_userid => _userid === found._id)
-            friendParams.friends = friendParams.friends.filter(_userid => _userid === found._id);
+            updateParams.friends = updateParams.friends.filter(_userid => _userid.toString() !== found.toString()) // Not the friend
+            friendParams.friends = friendParams.friends.filter(_userid => _userid.toString() !== user.id.toString()); //Not me
             dirty = true;
-            //console.log("deleting");
           }
         }
         if (dirty){
         //  console.log("Before ", friendParams)
-
           const friendUpdate = await User.findByIdAndUpdate(friend, friendParams, {
             new: true,
           })
-         // console.log("After");
+          console.log("After Update : ", friendUpdate);
         }
       }
     }

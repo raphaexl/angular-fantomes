@@ -13,7 +13,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class FantomeDetailComponent {
   //@Input() fantome?: fantome;
   fantome: Fantome | undefined;
-  localUserId: string = 'd';
 
   constructor(
     private route: ActivatedRoute,
@@ -37,21 +36,57 @@ export class FantomeDetailComponent {
     this.location.back();
   }
 
-  makeFriend(){
+  save(): void {
+    if (this.fantome) {
+      const localIdKey = this.getLocalUserId();
+        if (localIdKey){
+        this.fantomeService.updateFantome(this.fantome, localIdKey, undefined, undefined, this.fantome.role)
+          .subscribe(() => this.goBack());
+      }
+    }
+  }
 
+  updateRole(){
+    if (this.fantome) {
+      const localIdKey = this.getLocalUserId();
+      if (localIdKey){
+      this.fantomeService.updateFantome(this.fantome, localIdKey, undefined, undefined, this.fantome.role)
+        .subscribe(() => this.goBack());
+      }
+    }
+  }
+
+  addAsFriend(){
+    if (this.fantome) {
+      const localIdKey = this.getLocalUserId();
+      if (localIdKey){
+      this.fantomeService.updateFantome(this.fantome, localIdKey,  this.fantome._id, 'add', this.fantome.role)
+        .subscribe(() => this.goBack());
+      }
+    }
   }
 
   removeAsFriend(){
-    
+    if (this.fantome) {
+      const localIdKey = this.getLocalUserId();
+      if (localIdKey){
+        this.fantomeService.updateFantome(this.fantome, localIdKey, this.fantome._id, 'remove', this.fantome.role)
+        .subscribe(() => this.goBack());
+      }
+      
+    }
   }
 
   isFriend(){
-    
+    const localIdKey = this.getLocalUserId();
+    return this.fantome?.friends.find(userId => userId === localIdKey) !== undefined;
   }
 
   public getLocalUserId():string | null{
     return this.authenticationService.getLocalID();
   }
+
+
 /*
   public getLocalUserId():string | null{
     return this.authenticationService.getLocalID();

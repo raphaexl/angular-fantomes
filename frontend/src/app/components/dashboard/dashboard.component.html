@@ -1,12 +1,22 @@
 
-<mat-card>
+<mat-card >
     <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+        <div *ngIf="fantome">
+            <div>Me  : {{fantome.name | uppercase}}</div>
+            <div>Role: {{fantome.role}}</div>
+        </div>
         <h2>Friends</h2>
-        <div class="fantomees-menu">
-          <a *ngFor="let fantome of fantomes"
-              routerLink="/detail/{{fantome._id}}">
-              {{fantome.name}}
-          </a>
+        <div *ngIf="fantomes.length > 0; else noFriend" class="fantomees-menu">
+            <a *ngFor="let fantome of fantomes"
+            routerLink="/detail/{{fantome._id}}">
+            {{fantome.name}}
+        </a>
+        </div>
+        <ng-template #noFriend>
+          You have no Friends Yet :-)
+        </ng-template>
+        <div>
+            <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
         </div>
     </mat-card-content>
 </mat-card>
