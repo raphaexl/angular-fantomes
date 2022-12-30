@@ -32,6 +32,7 @@ export class FantomeService {
   updateFantome(fantome: Fantome, localId:string, friend?: string, action?:string, role?:string): Observable<any> {
     const body = new URLSearchParams();
  
+    //Depending on the friend and the action or the role set the body
     if (friend){
       body.set('friend', friend);
       if (action && action?.toLocaleLowerCase() === 'add' || action?.toLocaleLowerCase() === 'remove'){

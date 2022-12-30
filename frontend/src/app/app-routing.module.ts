@@ -21,9 +21,12 @@ const routes: Routes = [
     path: 'register',
     component: RegisterPageComponent,
   },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: FantomeDetailComponent },
-  { path: 'fantomes', component: HomeComponent }
+  { path: 'dashboard', component: DashboardComponent,
+  canActivate: [AuthGuard], },
+  { path: 'detail/:id', component: FantomeDetailComponent,
+  canActivate: [AuthGuard], },
+  { path: 'fantomes', component: HomeComponent,
+  canActivate: [AuthGuard], }
 ];
 
 @NgModule({
