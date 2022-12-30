@@ -1,4 +1,5 @@
 export const environment = {
-    production: false,
-    apiUrl: 'http://localhost:5000/api/users',
+    production: true,
+    apiUrl:'https://ghosts-app.onrender.com/api/users',
+   // apiUrl: 'http://localhost:5000/api/users',
   };
