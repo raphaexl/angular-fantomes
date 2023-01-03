@@ -26,10 +26,8 @@ export class HomeComponent implements OnInit {
   }
 
   fantomes:Fantome[] = [];
-  //selectedFantome?: Fantome;
 
   getFantomes():void{
-    //this.fantomes = this.fantomeService.getFantomes();
     this.fantomeService.getFantomes().subscribe(fantomes => this.fantomes = fantomes);
   }
 

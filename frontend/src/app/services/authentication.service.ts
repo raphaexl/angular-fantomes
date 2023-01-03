@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationClient } from '../clients/authentication.client';
+import { Fantome } from '../fantome';
+import { FantomeService } from './fantome.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,7 @@ export class AuthenticationService {
 
   constructor(
     private authenticationClient: AuthenticationClient,
+    private fantomeService: FantomeService,
     private router: Router
   ) {}
 
@@ -29,6 +32,20 @@ export class AuthenticationService {
         localStorage.setItem(this.tokenKey, newUser.token);
         localStorage.setItem(this.localIdKey, newUser._id);
         this.router.navigate(['/']);
+      });
+  }
+
+  addAsFriend( friendId:string, fantome:Fantome):void{
+    const local_Id:string = localStorage.getItem(this.localIdKey) as string;
+      this.fantomeService.updateFantome(fantome, local_Id, friendId, 'add', fantome.role)
+        .subscribe(() => this.router.navigate(['/']));
+      }
+
+  public registerFriend( username: string, email: string, password: string, fantome:Fantome): void {
+    this.authenticationClient
+      .register(username, email, password)
+      .subscribe((newUser) => {
+      this.addAsFriend(newUser._id, fantome);
       });
   }
 

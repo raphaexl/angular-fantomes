@@ -104,25 +104,29 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/update/:id
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
+  //console.log("Request coming ? : ", req.params.id);
   const user = await User.findById(req.params.id)
+  //console.log("Outr ");
   const { role, friend, action } = req.body
   if (!user) {
     res.status(400)
     throw new Error('Requested User not found')
   }
-
+  //console.log("Fread?");
   // Check for user
   if (!req.user) {
+  //  console.log("User not found");
     res.status(401)
     throw new Error('User not found')
   }
-
+//console.log("Before")
   
   // Make sure the logged in user matches the Friend Req user
   if (user.id.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
+  //console.log("Before2")
 
   let updateParams = {}
   let friendParams = {}
@@ -135,6 +139,8 @@ const updateUser = asyncHandler(async (req, res) => {
     //If we found the friend 
     if (friend){
       if (action){
+   //     console.log("Before 3")
+
         const found = user.friends.find(_userid => _userid.toString() === friend);
         //Check among all users
         const req_user = await User.findById(friend)
@@ -149,6 +155,8 @@ const updateUser = asyncHandler(async (req, res) => {
             updateParams.friends.push(req_user._id);
             friendParams.friends.push(user._id);
             dirty = true;
+          //  console.log("Friend Params : ",  friendParams);
+          //  console.log("Add Friend Request : ",  updateParams);
           }
         }else if(action.toLowerCase() === 'remove'){
           if (found){ // He was a friend remove him
@@ -158,6 +166,7 @@ const updateUser = asyncHandler(async (req, res) => {
           }
         }
         if (dirty){
+      //    console.log("Updated For the friend")
           const friendUpdate = await User.findByIdAndUpdate(friend, friendParams, {
             new: true,
           })
@@ -165,6 +174,7 @@ const updateUser = asyncHandler(async (req, res) => {
         }
       }
     }
+   // console.log("Updated For the Me")
   const updatedUser = await User.findByIdAndUpdate(req.params.id, updateParams, {
     new: true,
   })

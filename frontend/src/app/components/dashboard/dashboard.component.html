@@ -11,12 +11,23 @@
             routerLink="/detail/{{fantome._id}}">
             {{fantome.name}}
         </a>
+        <div *ngIf="fantome">
+            <a routerLink="/newFriend/{{fantome._id}}">
+                Register New Friend Fantome 
+            </a>
+        </div>
         </div>
         <ng-template #noFriend>
           You have no Friends Yet :-)
+          <div *ngIf="fantome">
+            <a routerLink="/newFriend/{{fantome._id}}">
+                New Friend
+            </a>
+        </div>
         </ng-template>
         <div>
             <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
         </div>
+        
     </mat-card-content>
 </mat-card>

@@ -36,6 +36,7 @@ export class FantomeService {
     if (friend){
       body.set('friend', friend);
       if (action && action?.toLocaleLowerCase() === 'add' || action?.toLocaleLowerCase() === 'remove'){
+        console.log("Add Friend request : ", body.toString());
         body.set('action', action);
       }
     }

@@ -21,6 +21,7 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FantomeDetailComponent } from './components/fantome-detail/fantome-detail.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RegisterFriendComponent } from './components/register-friend/register-friend.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LoginPageComponent,
     RegisterPageComponent,
     FantomeDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegisterFriendComponent
   ],
   imports: [
     BrowserModule,

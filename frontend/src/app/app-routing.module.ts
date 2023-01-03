@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FantomeDetailComponent } from './components/fantome-detail/fantome-detail.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterFriendComponent } from './components/register-friend/register-friend.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { AuthGuard } from './helpers/auth.guard';
 
@@ -26,7 +27,9 @@ const routes: Routes = [
   { path: 'detail/:id', component: FantomeDetailComponent,
   canActivate: [AuthGuard], },
   { path: 'fantomes', component: HomeComponent,
-  canActivate: [AuthGuard], }
+  canActivate: [AuthGuard], },
+  { path: 'newFriend/:id', component: RegisterFriendComponent,
+  canActivate: [AuthGuard], },
 ];
 
 @NgModule({
